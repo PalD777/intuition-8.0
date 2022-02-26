@@ -5,6 +5,8 @@ import firebase_admin
 from firebase_admin import firestore
 import hashlib
 from blockchain import Blockchain, Transaction
+
+
 # Sets up the Flask application
 app = Flask(__name__)
 app.secret_key = 'Secret Key 123'
@@ -45,12 +47,17 @@ def request_fields_from_form():
     photoURL = request.form["photoURL"]
     return name, id, photoURL
 
-@app.route("/nft_menu", methods=['GET', 'POST'])
-def getnfts():
+@app.route("/nft_menu/<id>", methods=['GET', 'POST'])
+def getnfts(id):
+    existing_data = get_dict_for_document_and_collection(id, 'data')
+    if not existing_data['conv_rate']:
+        conv_rate = 10
+    else:
+        conv_rate = int(existing_data['conv_rate'])
     nfts= (Path(__file__).parent / 'static' / 'images' / 'NFT').glob('*.jpg')
-    return render_template("menu.html", nfts=nfts)
+    return render_template("menu.html", nfts=nfts, conv=conv_rate)
 
-@app.route("/add_course_money", methods=['GET', 'POST'])
+@app.route("/add_course_money", methods=['POST'])
 def add_course_money():
     '''Displays home page'''
     if request.method == 'POST':
@@ -160,5 +167,6 @@ def get_tasks():
         tasks_data[file.stem] = Markup(open(file).read().replace('\n', '<br>'))
 
 if __name__ == "__main__":
+    get_tasks()
     app.run(debug = True)
 

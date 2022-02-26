@@ -10,6 +10,7 @@ function complete_course(course){
                 url: "/add_course_money",
               }).done(function (data) {
                 alert(data);
+                window.location.reload()
               });
         }})
 }
