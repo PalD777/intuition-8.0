@@ -17,5 +17,11 @@ def form():
     '''Displays form page'''
     return render_template("form.html")
 
+@app.route("/game", methods=['GET'])
+def game():
+    '''Displays form page'''
+    return render_template("gamification.html")
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.PORT = 5000
+    app.run(port=app.PORT)
