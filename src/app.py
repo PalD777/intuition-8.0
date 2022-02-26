@@ -6,7 +6,6 @@ from firebase_admin import firestore
 import math
 from blockchain import Blockchain, Transaction
 
-
 # Sets up the Flask application
 app = Flask(__name__)
 app.secret_key = 'Secret Key 123'
@@ -17,9 +16,103 @@ cred_obj = firebase_admin.credentials.Certificate(
 default_app = firebase_admin.initialize_app(cred_obj)
 blockchain = Blockchain()
 
+
 @app.route("/", methods=["GET"])
 def return_home():
     return render_template('index.html')
+
+@app.route("/check_stockprice",methods=["POST"])
+def get_stockprice():
+    from yahoo_fin import stock_info as si
+    stockname= request.form["stock"]
+    try:
+        price = si.get_live_price(stockname)
+        return str(price)
+    except:
+        return( "0")
+
+@app.route("/buy_stock",methods=["POST"])
+def buy_stock():
+    from yahoo_fin import stock_info as si
+    stockname= request.form["stock"]
+    try:
+        price = si.get_live_price(stockname)
+    except:
+        price = None
+    if price:
+        quantity = int(request.form["quantity"])
+        total_price = price*int(quantity)
+        id = request.form["id"]
+        old_data = get_dict_for_document_and_collection(id,'data')
+        existing_stocks=old_data['stocks']
+        if not existing_stocks:
+            existing_stocks = []
+        if total_price<=old_data["coins"]:
+            stock_changed=False
+            for i in existing_stocks:
+                if i["stockname"] == stockname:
+                    i["quantity"]=int(i["quantity"])+int(quantity)
+                    i["price_buy"]=int(i["price_buy"]+price)/i["quantity"]
+                    
+                    stock_changed=True
+                    break
+            if stock_changed==False:
+                existing_stocks.append({
+                    'stockname':stockname,
+                    'quantity':quantity,
+                    'price_buy':price
+                })
+            db = firestore.client()
+            doc_ref = db.collection(u'data').document(id)
+            data = {
+                u'stocks': existing_stocks
+            }
+            doc_ref.set(data,merge=True)
+            return(f"{quantity} {stockname} stocks bought for {total_price} FEX")
+        else:
+            return("Not enough money to buy the stock")
+    else:
+        return("Stock not found")
+
+@app.route("/sell_stock",methods=["POST"])
+def sell_stock():
+    from yahoo_fin import stock_info as si
+    stockname= request.form["stock"]
+    try:
+        price = si.get_live_price(stockname)
+    except:
+        price = None
+    if price:
+        quantity = int(request.form["quantity"])
+        total_price = price*quantity
+        id = request.form["id"]
+        old_data = get_dict_for_document_and_collection(id,'data')
+        existing_stocks=old_data['stocks']
+        stock_number=0
+        for stocks in existing_stocks:
+            if stocks['stockname']==stockname:
+                old_quantity= int(stocks["quantity"])
+                if int(quantity)<=int(stocks["quantity"]):
+                    stocks["quantity"]=int(stocks["quantity"])-quantity
+                if int(stocks["quantity"])==0:
+                    existing_stocks.pop(stock_number)
+                total_money_to_add= quantity*price
+                print(stocks["quantity"]*stocks["price_buy"])
+                total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
+                new_coins= old_data["coins"]+total_money_to_add
+                db = firestore.client()
+                doc_ref = db.collection(u'data').document(id)
+                data = {
+                    u'stocks': existing_stocks,
+                    u'coins':new_coins,
+                }
+                doc_ref.set(data,merge=True)
+            stock_number+=1
+            return(f"{quantity} {stockname} stocks sold for {total_profit} FEX profit")
+        else:
+            return("Not enough quantity of stock to sell it")
+    else:
+        return("Stock not found")
 
 @app.route("/setupfirebase", methods=["POST"])
 def make_database_from_info():
@@ -37,6 +130,7 @@ def make_database_from_info():
             u'courses':[],
             u'current_course':0,
             u'conv_rate':10,
+            u'stocks':[]
         }
         doc_ref.set(data)
     return "Made Database"
