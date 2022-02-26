@@ -4,7 +4,7 @@ from flask_cors import CORS
 import firebase_admin
 from firebase_admin import firestore
 import math
-from .blockchain import Blockchain, Transaction
+from blockchain import Blockchain, Transaction
 import logging
 
 # Sets up the Flask application
@@ -88,9 +88,9 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
         stock_changed=False
         for i in existing_stocks:
             if i[f"{utility_name}name"] == stockname:
+                old_quantity=i["price_buy"]
                 i["quantity"]=int(i["quantity"])+int(quantity)
-                i["price_buy"]=int(i["price_buy"]+price)/i["quantity"]
-                    
+                i["price_buy"]=(i["price_buy"]*old_quantity+price*quantity)/i["quantity"]
                 stock_changed=True
                 break
         if stock_changed==False:
@@ -99,10 +99,12 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
                     'quantity':quantity,
                     'price_buy':price
                 })
+        new_coins= old_data["coins"]-total_price
         db = firestore.client()
         doc_ref = db.collection(u'data').document(id)
         data = {
-                f'{utility_name}s': existing_stocks
+                f'{utility_name}s': existing_stocks,
+                'coins':new_coins
             }
         doc_ref.set(data,merge=True)
         to_retun=f"{quantity} {stockname} {utility_name}s bought for {total_price} FEX"
@@ -157,8 +159,7 @@ def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
                 if int(stocks["quantity"])==0:
                     existing_stocks.pop(stock_number)
                 total_money_to_add= quantity*price
-                print(stocks["quantity"]*stocks["price_buy"])
-                total_profit= - (old_quantity*stocks["price_buy"]) + total_money_to_add
+                total_profit=  total_money_to_add - (quantity*stocks["price_buy"])
                 new_coins= old_data["coins"]+total_money_to_add
                 db = firestore.client()
                 doc_ref = db.collection(u'data').document(id)
@@ -366,5 +367,5 @@ def get_tasks():
 
 if __name__ == "__main__":
     get_tasks()
-    app.run(debug = True)
+    app.run()
 
