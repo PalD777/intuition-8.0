@@ -11,6 +11,47 @@
     <link href="{{url_for('static', filename='css/custom-styles.css')}}" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='../static/input/style.css' rel='stylesheet' type='text/css' />
+
+    <style scoped>
+        footer{
+           display: none;
+        }
+        #wrapper{
+            height: 100%;
+            overflow-y: none;
+        }
+
+/* CSS */
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
+}
+    </style>
     <div id="wrapper">
 
         <div id="page-wrapper">
@@ -23,43 +64,28 @@
                     </div>
                 </div>
                 <!-- /. ROW  -->
+                <div class="card">
+                    <h2>Stock Control</h2><br><br>
+                    <label class="input">
+                      <input class="input__field" type="text" placeholder=" "  id="stock"/>
+                      <span class="input__label">Stock Ticker</span>
+                    </label>
+                    <br><br>
+                    <label class="input">
+                      <input class="input__field" type="text" placeholder=" " id="quantity" />
+                      <span class="input__label">Quantity</span>
+                    </label>
+                    <br>
+                    <div class="button-group">
+                      <button onclick="check_price()">Get Stock Price</button>
+                      <button onclick="sell_stock()">Sell Stock</button>
+                      <button onclick="buy_stock()">Buy Stock</button>
+                    </div>
+                  </div>
+                    
 
-                <div class="col-lg-6 offset-lg-3">
-                    <form id="search" action="#" method="GET">
-                      <div class="row"> 
-                        <div class="col-lg-6 col-sm-6">
-                          <fieldset>
-                            <input type="text" name="stock" class="stock" id="stock" placeholder="Stock..." autocomplete="on" required>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                          <fieldset>
-                            <input type="text" name="quantity" class="quantity" id="quantity" placeholder="Quantity..." autocomplete="on" required>
-                          </fieldset>
-                        </div>
-                
-                        <br><br><br>
-                        <div class="col-lg-6 col-sm-6">
-                          <fieldset>
-                            <div value = "Calculate" class="main-button" id="calculate" onclick="check_price()"> Calculate <i class="fa fa-angle-right"></i></div>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                          <fieldset>
-                            <div value = "Calculate" class="main-button" id="sell" onclick="sell_stock()"> Sell stock <i class="fa fa-angle-right"></i></div>
-                          </fieldset>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                          <fieldset>
-                            <div type="submit" class="main-button" value = "submit" id="buy" onclick="buy_stock()"> Buy stock <i class="fa fa-angle-right"></i></div>
-                          </fieldset>
-                        </div>
-                      </div>
-                    </form>
-                </div>   
-
-
-               <br><br><br><br><br><br>
+<br><br><br><br>
+ 
                 <!-- /. ROW  -->
 
                 <div class="row">
@@ -173,7 +199,6 @@
                     </div>
                 </div>
                 <!-- /. ROW  -->
-				<footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p></footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>

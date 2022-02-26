@@ -91,7 +91,9 @@
   will-change: box-shadow,transform;
   font-size: 18px;
 }
-
+footer{
+  margin-top: -5%;
+}
 .button-30:focus {
   box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
 }
@@ -117,9 +119,8 @@
         {{desc}}
       </div>
   </div>
-  <br><br>
 
-<center><button onclick = "complete_course('{{course}}');" name = "btn" class="button-30" style="margin-top: 100px;"> Finish Course! </button></center>
+<center><button onclick = "complete_course('{{course}}');" name = "btn" class="button-30" style="margin-top: 40px;"> Finish Course! </button></center>
 </div>
 <script src="{{url_for('static', filename='js/course.js')}}"></script>
 {% endblock %}
