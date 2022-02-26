@@ -47,6 +47,15 @@ https://templatemo.com/tm-570-chain-app-dev
       }
     
     </style>
+    <script type="text/javascript">
+        function get_user_url(base) {
+          firebase.auth().onAuthStateChanged(function (user) {
+              if (user) {
+                  window.location.href = '/' + base+ '/' + user.uid;
+              }}
+          )
+      }
+      </script>
   </head>
 
   <body>
@@ -81,7 +90,7 @@ https://templatemo.com/tm-570-chain-app-dev
               
               <li class="scroll-to-section"><a href="/game">FinGame</a></li>
               <li class="scroll-to-section"><a href="/invest">Invest</a></li>
-              <li class="scroll-to-section"><a href="/nft_menu">NFTs</a></li>
+              <li class="scroll-to-section"><a class='nft' onclick="get_user_url('nft_menu')" style="cursor:pointer;">NFTs</a></li>
               <li class="scroll-to-section" id="profile"><a>Profile</a> </li>
               <li class="scroll-to-section" id='logout' >
                         <a>Logout</a>
@@ -101,9 +110,7 @@ https://templatemo.com/tm-570-chain-app-dev
 
 
     {% block content %}{% endblock %}
-  <footer id="newsletter">
-        
-    </footer>
+  <footer id="newsletter"></footer>
     
     
       <!-- Scripts -->

@@ -3,8 +3,10 @@ from flask import Flask, render_template, request, Markup
 from flask_cors import CORS
 import firebase_admin
 from firebase_admin import firestore
-import hashlib
+import math
 from blockchain import Blockchain, Transaction
+
+
 # Sets up the Flask application
 app = Flask(__name__)
 app.secret_key = 'Secret Key 123'
@@ -45,12 +47,22 @@ def request_fields_from_form():
     photoURL = request.form["photoURL"]
     return name, id, photoURL
 
-@app.route("/nft_menu", methods=['GET', 'POST'])
-def getnfts():
+@app.route("/nft_menu/<id>", methods=['GET'])
+def getnfts(id):
+    existing_data = get_dict_for_document_and_collection(id, 'data')
+    if not existing_data['conv_rate']:
+        conv_rate = 10
+    else:
+        conv_rate = int(existing_data['conv_rate'])
     nfts= (Path(__file__).parent / 'static' / 'images' / 'NFT').glob('*.jpg')
-    return render_template("menu.html", nfts=nfts)
+    nft_data = []
+    for nft in nfts:
+        name = nft.name
+        price = round(math.sin(int(name.split('.')[0][3:])) * 30 + 40)
+        nft_data.append((name, price))
+    return render_template("menu.html", data=nft_data, conv=conv_rate)
 
-@app.route("/add_course_money", methods=['GET', 'POST'])
+@app.route("/add_course_money", methods=['POST'])
 def add_course_money():
     '''Displays home page'''
     if request.method == 'POST':
@@ -60,7 +72,7 @@ def add_course_money():
         courses_done = existing_data['courses']
         if not courses_done:
             courses_done = []
-        new_money = int(existing_data['coins']) + 100
+        new_money = int(existing_data['coins']) + 300
         courses_done.append(course[1:])
         courses_done = list(set(courses_done)) # Remove duplicate entries
         task_list = sorted(tasks_data.keys())
@@ -75,7 +87,7 @@ def add_course_money():
         doc_ref.set(data,merge=True)
         if task_no >= len(task_list):
             return "You have done all the courses!"
-        return f"You have unlocked a new course: {task_list[task_no][1:]}. We have added a 100 FEX to your account as a bonus!"
+        return f"You have unlocked a new course: {task_list[task_no][1:]}. We have added a 300 FEX to your account as a bonus!"
 
 @app.route('/profile/<id>', methods=['GET'])
 def serve_profile(id):
@@ -92,7 +104,6 @@ def buy_nft():
     existing_nfts=existing_data['nft']
     if not existing_nfts:
         existing_nfts = []
-
 
     if int(existing_data['coins']) >= int(price):
         new_money = int(existing_data['coins']) - int(price) 
@@ -153,12 +164,33 @@ def tasks(id):
 
 @app.route("/see_blockchain")
 def see_blockchain():
-    return(blockchain.display())
+    return Markup(blockchain.display().replace('\n', '<br>'))
+
+@app.route("/change_conv", methods=['POST'])
+def change_conv():
+    '''Displays home page'''
+    if request.method == 'POST':
+        id = request.form['id']
+        existing_data = get_dict_for_document_and_collection(id, 'data')
+        mult = request.form['mult']
+        conv_rate = existing_data['conv_rate']
+        if not conv_rate:
+            conv_rate = 10
+        new_rate = int(conv_rate) * float(mult)
+        db = firestore.client()
+        doc_ref = db.collection(u'data').document(id)
+        data = {
+            u'conv_rate': new_rate,
+        }
+        doc_ref.set(data,merge=True)
+        return f"Now the convertion rate is 1$ = {round(new_rate, 2)} FEX."
+
 def get_tasks():
     for file in sorted((Path(__file__).parent / 'tasks').glob('*.txt')):
         # Ensure users can't input to files or it will lead to server-side XSS
         tasks_data[file.stem] = Markup(open(file).read().replace('\n', '<br>'))
 
 if __name__ == "__main__":
+    get_tasks()
     app.run(debug = True)
 

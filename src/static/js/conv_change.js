@@ -1,16 +1,13 @@
-function buynft(nft, price){
-    alert('Transaction in progress')
-
+function conv_change(mult){
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             $.ajax({
                 data: {
                   id: user.uid,
-                  nft: nft,
-                  price: price,
+                  mult: mult,
                 },
                 type: "POST",
-                url: "/buy_nft",
+                url: "/change_conv",
               }).done(function (data) {
                 alert(data);
               });

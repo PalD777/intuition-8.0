@@ -1,4 +1,5 @@
-<b>Deflation</b> means that generally the prices of products are going down. It is the opposite of inflation. 
+
+b>Deflation</b> means that generally the prices of products are going down. It is the opposite of inflation. 
 It is said, that deflation happens when there is less money than there are goods.
 It is also said that deflation is a sign of a weak state of that country's economy, because deflation usually happens during an economic collapse. 
 Deflation is thought to be even worse than inflation.
@@ -10,3 +11,8 @@ Even if an economy is growing, there can be some amount of deflation - if the am
 Deflation can be helped by the country's own government by lowering the companies' tax levels, so they can lower their prices while getting the same profit. 
 This way normal people are more encouraged to buy the cheap goods they were waiting for, and slowly the companies can make more profit. 
 Governments do not like deflation, because it means that they can collect less tax.
+<br><br>
+<center>
+     <button onclick = "conv_change(1/2);" name = "defln" class="button-56"> Click here to experience deflation! </button>
+</center>
+<script src="/static/js/conv_change.js"></script>

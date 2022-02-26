@@ -2,116 +2,82 @@
 
 {% block content %}
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat');
-
-* {
-	box-sizing: border-box;
+        body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
-footer{
-    margin-top: -10%;
-    background-color: #28223F;
-
+.emp-profile{
+    padding: 3%;
+    margin-top: 10%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
 }
-body{
-    background-color: #28223F;
-}
-container {
-	background-color: #28223F;
-	font-family: Montserrat, sans-serif;
-	
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-
-	min-height: 100vh;
-	margin: 0;
+.profile-img{
+    text-align: center;
 }
 
-h3 {
-	margin: 10px 0;
+.profile-head h5{
+    color: #333;
 }
-
-h6 {
-	margin: 5px 0;
-	text-transform: uppercase;
+.profile-head h6{
+    color: #0062cc;
 }
-
-p {
-	font-size: 14px;
-	line-height: 21px;
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
 }
-
-.card-container {
-    margin-top: 100px;
-	background-color: #231E39;
-	border-radius: 5px;
-	box-shadow: 0px 10px 20px -10px rgba(0,0,0,0.75);
-	color: #B3B8CD;
-	padding-top: 30px;
-	position: relative;
-	width: 400px;
-    padding: 10px;
-	max-width: 100%;
-	text-align: center;
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
 }
-
-.card-container .pro {
-	color: #231E39;
-	background-color: #FEBB0B;
-	border-radius: 3px;
-	font-size: 14px;
-	font-weight: bold;
-	padding: 3px 7px;
-	position: absolute;
-	top: 30px;
-	left: 30px;
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
 }
-
-.card-container .round {
-	border: 1px solid #03BFCB;
-	border-radius: 50%;
-	padding: 7px;
+.profile-head .nav-tabs{
+    margin-bottom:5%;
 }
-
-button.primary {
-	background-color: #03BFCB;
-	border: 1px solid #03BFCB;
-	border-radius: 3px;
-	color: #231E39;
-	font-family: Montserrat, sans-serif;
-	font-weight: 500;
-	padding: 10px 25px;
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
 }
-
-button.primary.ghost {
-	background-color: transparent;
-	color: #02899C;
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
 }
-
-.skills {
-	background-color: #1F1A36;
-	text-align: left;
-	padding: 15px;
-	margin-top: 30px;
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
 }
-
-.skills ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
 }
-
-.skills ul li {
-	border: 1px solid #2D2747;
-	border-radius: 2px;
-	display: inline-block;
-	font-size: 12px;
-	margin: 0 7px 7px 0;
-	padding: 7px;
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
 }
-
-
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
     </style>
 </head>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -134,7 +100,6 @@ button.primary.ghost {
 
 
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
-
 <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
     <!-- Background of PhotoSwipe. 
@@ -199,31 +164,68 @@ button.primary.ghost {
         </div>
 
 </div>
-<container>
-<div class="card-container">
-	<span class="pro">PRO</span>
-	<img class="round" src="{{data['photoURL']}}" alt="user" />
-	<h3>{{data["name"]}}</h3><br><br>
-	<h4>{{data["coins"]}} FEX</h4><br><br>
 
-	<div class="buttons">
-		<button class="primary" id="btn">
-			Open NFT Gallery
-		</button>
-		
-	</div>
-	<div class="skills">
-		<h6>Courses</h6>
-		<ul>
-            {% for nft in data["courses"] %}
-                                            <li>{{nft}}</li>
-            {% endfor %}
-			
-		</ul>
-	</div>
-</div>
-</container>
 
+<div class="container emp-profile" id="blabla">
+        <form method="post">
+           
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="{{data['photoURL']}}" alt=""/>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{data["name"]}}</p>
+                                </div>
+                            </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Coins</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{data["coins"]}} FEX</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Completed Courses</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>
+                                            {% for nft in data["courses"] %}
+                                            <span>{{nft}}</span>, 
+                                            {% endfor %}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>NFTs</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label id="btn" style="cursor:pointer; color:#0062cc">Open NFT Gallery</label>
+                                        </div>
+
+                                       
+
+                                    </div>
+                                   
+                                    
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </form>           
+    </div>
     <script>
         var openPhotoSwipe = function() {
         var pswpElement = document.querySelectorAll('.pswp')[0];

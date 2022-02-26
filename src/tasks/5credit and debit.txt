@@ -1,0 +1,17 @@
+<h2> Intro to Debit and Credit </h2>
+
+<b>Debit</b> - A debit is an accounting entry that either increases an asset or expense account, or decreases a liability or equity account. It is positioned to the left in an accounting entry.
+
+<b>Credit</b> - A credit is an accounting entry that either increases a liability or equity account, or decreases an asset or expense account. It is positioned to the right in an accounting entry.
+
+<h2>Debit and Credit Usage</h2>
+Whenever an accounting transaction is created, at least two accounts are always impacted, with a debit entry being recorded against one account and a credit entry being recorded against the other account. 
+There is no upper limit to the number of accounts involved in a transaction - but the minimum is no less than two accounts. 
+The totals of the debits and credits for any transaction must always equal each other, so that an accounting transaction is always said to be "in balance." 
+If a transaction were not in balance, then it would not be possible to create financial statements. 
+Thus, the use of debits and credits in a two-column transaction recording format is the most essential of all controls over accounting accuracy.
+
+Debits and credits have different impacts across several broad types of accounts, which are:
+    <b>Asset accounts</b> - A debit increases the balance and a credit decreases the balance.
+    <b>Liability accounts</b> - A debit decreases the balance and a credit increases the balance.
+    <b>Equity accounts</b> - A debit decreases the balance and a credit increases the balance.
