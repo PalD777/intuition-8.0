@@ -344,8 +344,10 @@ def change_conv():
 
 @app.route('/sw.js')
 def sw():
-    response=make_response(
-                     send_from_directory('static',filename='sw.js'))
+    try:
+        response=make_response(send_from_directory('static',path='sw.js'))
+    except:
+        response=make_response(send_from_directory('static',filename='sw.js'))
     response.headers['Content-Type'] = 'application/javascript'
     return response
 
