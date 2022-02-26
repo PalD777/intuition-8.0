@@ -1,0 +1,20 @@
+<h2><b>NFT</b></h2>
+
+A non-fungible token (NFT) is a unique digital code that represents some kind of digital item. A NFT is secured and stored on a public blockchain. Each NFT has a digital signature that makes it impossible for it to be exchanged for or equal to one another.
+NFTs are designed to give you something that can’t be copied: ownership of the work (though the artist can still retain the copyright and reproduction rights, just like with physical artwork). To put it in terms of physical art collecting: anyone can buy a painting. But only one person can own the original. 
+Non-fungible tokens are an evolution over the relatively simple concept of cryptocurrencies. Modern finance systems consist of sophisticated trading and loan systems for different asset types, ranging from real estate to lending contracts to artwork. By enabling digital representations of physical assets, NFTs are a step forward in the reinvention of this infrastructure. NFTs can also democratize investing by fractionalizing physical assets like real estate. It is much easier to divide a digital real estate asset among multiple owners than a physical one. 
+
+<b>How to Buy NFTs<b>
+<ul>
+<li>Setup a digital wallet that allows you to store NFTs and cryptocurrencies</li>
+<li>Purchase Cryptocurrency</li>
+<li>Purchase desired NFT (often in an auction format)</li>
+</ul>
+
+<b>Popular NFT Use Cases</b>
+<ul>
+<li>Digital Art</li>
+<li>Sports Collectibles</li>
+<li>Game Assets</li>
+<li>Memes</li>
+</ul>

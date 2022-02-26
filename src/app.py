@@ -258,7 +258,8 @@ def tasks(id):
 
 @app.route("/see_blockchain")
 def see_blockchain():
-    return Markup(blockchain.display().replace('\n', '<br>'))
+    bc = Markup(blockchain.display().replace('\n', '<br>'))
+    return render_template('blockchain.html', blockchain=bc)
 
 @app.route("/change_conv", methods=['POST'])
 def change_conv():

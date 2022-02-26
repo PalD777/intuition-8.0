@@ -23,7 +23,7 @@ class Transaction():
   def display(self):
     ''' Prints this transaction to the console 
     '''
-    censored = self.receiver[:6] + '*' * [len(self.receiver[6:])]
+    censored = self.receiver[:6] + '*' * len(self.receiver[6:])
     return(f'Sender:{self.sender}, Receiver:{self.receiver}, Amount:{self.amount}')
 
 
