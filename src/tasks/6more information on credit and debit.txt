@@ -1,0 +1,19 @@
+<h2><b>Debit and Credit Explained with Accounting Equation</b></h2>
+
+The reason for this seeming reversal of the use of debits and credits is caused by the underlying accounting equation upon which the entire structure of accounting transactions are built, which is:
+
+Assets = Liabilities + Equity
+
+
+<h2><b>Debit and Credit Rules</b></h2>
+
+<b>Changes to Debit Balances</b>
+All accounts that normally contain a debit balance will increase in amount when a debit (left column) is added to them, and reduced when a credit (right column) is added to them. The types of accounts to which this rule applies are expenses, assets, and dividends.
+
+<b>Changes to Credit Balances</b>
+All accounts that normally contain a credit balance will increase in amount when a credit (right column) is added to them, and reduced when a debit (left column) is added to them. The types of accounts to which this rule applies are liabilities, revenues, and equity.
+
+<b>Totals Must Match</b>
+The total amount of debits must equal the total amount of credits in a transaction. Otherwise, an accounting transaction is said to be unbalanced, and will not be accepted by the accounting software.
+
+

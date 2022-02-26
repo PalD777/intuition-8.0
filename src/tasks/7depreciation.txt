@@ -1,0 +1,16 @@
+<h2><b>Depreciation</b></h2>
+
+A reduction of asset value over time due to wear and tear or obsolescence. It is a type of expense to the company. There are two methods of calculating depreciation:
+
+1. <b>Straight Line Method</b> - The method assumes that asset declines at a constant rate
+                    <b>Formula</b> - (Cost of Asset - Residual Value) ÷ Useful Life
+                    The cost of the asset finally becomes zero. This method is based on the historical cost concept where the assets are recorded on their original value.
+
+2.<b>Written Down Value Method</b> - The method assumes that asset declines more at the start. There is no formula for this method but it is calculated on the book value at the start of every year. The cost of the asset can never become zero. This method calculates the depreciation value on the book value of the asset
+
+<b>Causes of Depreciation:</b>
+<ul>
+<li> Wear and tear of the asset</li>
+<li>Exhaustion</li>
+<li>Obsolescence</li>
+</ul>
