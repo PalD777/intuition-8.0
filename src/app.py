@@ -34,7 +34,7 @@ def get_stockprice():
 @app.route("/check_cryptoprice",methods=["POST"])
 def check_cryptoprice():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
         price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
         if price == None:
@@ -46,7 +46,7 @@ def check_cryptoprice():
 @app.route("/buy_crypto",methods=["POST"])
 def buy_crypto():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
         price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
     except:
@@ -110,7 +110,7 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
 @app.route("/sell_stock",methods=["POST"])
 def sell_stock():
     from yahoo_fin import stock_info as si
-    stockname= request.form["crypto"]
+    stockname= request.form["stock"]
     try:
         price = si.get_live_price(stockname)
     except:
@@ -128,7 +128,7 @@ def sell_stock():
 @app.route("/sell_crypto",methods=["POST"])
 def sell_crypto():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
         price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
     except:
