@@ -4,7 +4,7 @@ from flask_cors import CORS
 import firebase_admin
 from firebase_admin import firestore
 import math
-from blockchain import Blockchain, Transaction
+from .blockchain import Blockchain, Transaction
 import logging
 
 # Sets up the Flask application
@@ -202,6 +202,18 @@ def request_fields_from_form():
     photoURL = request.form["photoURL"]
     return name, id, photoURL
 
+@app.route("/show_leaderboard", methods=['GET'])
+def show_leaderboard():
+    db = firestore.client()
+    doc_ref = db.collection('data')
+    doc = doc_ref.get()
+    list_of_all_users=[]
+    for i in doc:
+        list_of_all_users.append(i.to_dict())
+    list_of_all_users = sorted(list_of_all_users, key=lambda d: d['coins'],reverse=True) 
+    return render_template('leaderboard.html',list_of_users=list_of_all_users[:5])
+
+
 @app.route("/nft_menu/<id>", methods=['GET'])
 def getnfts(id):
     existing_data = get_dict_for_document_and_collection(id, 'data')
@@ -367,5 +379,5 @@ def get_tasks():
 
 if __name__ == "__main__":
     get_tasks()
-    app.run()
+    app.run(debug=True)
 
