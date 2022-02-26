@@ -1,0 +1,29 @@
+<h2><b>Short Selling</b></h2>
+
+Short selling is an investment or trading strategy that speculates on the decline in a stock or other security's price. It is an advanced strategy that should only be undertaken by experienced traders and investors. Traders may use short selling as speculation, and investors or portfolio managers may use it as a hede against the downside risk of a long position. Speculation carries the possibility of substantial risk and is an advanced trading method. 
+A hedge is an investment that is made with the intention of reducing the risk of adverse price movements in an asset. It is a more common transaction involving placing an offsetting position to reduce risk exposure.
+With short selling, a seller opens a short position by borrowing shares, usually from a broker-dealer, hoping to buy them back for a profit if the price declines. Shares must be borrowed because you cannot sell shares that do not exist. To close a short position, a trader buys the shares back on the market—hopefully at a price less than what they borrowed the asset—and returns them to the lender or broker. Traders must account for any interest charged by the broker or commissions charged on trades.To open a short position, a trader must have a margin account and will usually have to pay interest on the value of the borrowed shares while the position is open. 
+
+<b>Why Sell Short?</b>
+The most common reasons for engaging in short selling are speculation and hedging. A speculator is making a pure price bet that it will decline in the future. If they are wrong, they will have to buy the shares back higher, at a loss. Because of the additional risks in short selling due to the use of margin, it is usually conducted over a smaller time horizon and is thus more likely to be an activity conducted for speculation.
+
+People may also sell short in order to hedge a long position. For instance, if you own call options (which are long positions) you may want to sell short against that position to lock in profits. Or, if you want to limit downside losses without actually exiting a long stock position you can sell short in a stock that is closely related or highly correlated with it.
+
+<b>Pros and Cons of Short Selling</b>
+Pros
+<ul>
+<li>Possibility of high profits</li>
+<li>Little initial capital required</li>
+<li>Leveraged investements possible</li>
+<li>Hedge against other holdings</li>
+</ul>
+
+Cons
+<ul>
+<li>Potentially unlimited losses</li>
+<li> Margin account necessary</li>
+<li> Margin interest incurred</li>
+<li> Short Squeezes </li>
+
+<iframe width = "1280" height = "720" src="https://www.youtube.com/watch?v=Z1LctxzEREE">
+</iframe>
