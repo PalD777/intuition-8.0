@@ -1,5 +1,5 @@
 from pathlib import Path
-from flask import Flask, render_template, request, Markup
+from flask import Flask, render_template, request, Markup, make_response, send_from_directory
 from flask_cors import CORS
 import firebase_admin
 from firebase_admin import firestore
@@ -279,6 +279,13 @@ def change_conv():
         }
         doc_ref.set(data,merge=True)
         return f"Now the convertion rate is 1$ = {round(new_rate, 2)} FEX."
+
+@app.route('/sw.js')
+def sw():
+    response=make_response(
+                     send_from_directory('static',filename='sw.js'))
+    response.headers['Content-Type'] = 'application/javascript'
+    return response
 
 def get_tasks():
     for file in sorted((Path(__file__).parent / 'tasks').glob('*.txt')):
