@@ -168,9 +168,9 @@ def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
                     }
                 doc_ref.set(data,merge=True)
                 to_return = f"{quantity} {stockname} {utility_name}s sold for {total_profit} FEX profit"
+            else:
+                to_return = f"Not enough quantity of {utility_name} to sell it"
         stock_number+=1
-    else:
-        to_return = f"Not enough quantity of {utility_name} to sell it"
     return to_return
 
 @app.route("/setupfirebase", methods=["POST"])
