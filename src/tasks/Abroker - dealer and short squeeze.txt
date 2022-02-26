@@ -1,0 +1,19 @@
+<h2><b>Broker - Dealer and Short Squeeze</b></h2>
+A broker-dealer (B-D) is a person or firm in the business of buying and selling securities for its own account or on behalf of its customers. The term broker-dealer is used in U.S. securities regulation parlance to describe stock brokerages because most of them act as both agents and principals.
+
+A brokerage acts as a broker (or agent) when it executes orders on behalf of its clients, whereas it acts as a dealer, or principal when it trades for its own account.
+
+Broker-dealers fulfill several important functions in the financial industry. These include providing investment advice to customers, supplying liquidity through market-making activities, facilitating trading activities, publishing investment research, and raising capital for companies. Broker-dealers range in size from small independent boutiques to large subsidiaries of giant commercial and investment banks.
+
+
+A short squeeze is an unusual condition that triggers rapidly rising prices in a stock or other tradable security. For a short squeeze to occur, the security must have an unusual degree of short sellers holding positions in it. The short squeeze begins when the price jumps higher unexpectedly. The condition plays out as a significant measure of the short sellers coincidentally decide to cut losses and exit their positions.
+
+
+
+
+
+
+
+
+
+
