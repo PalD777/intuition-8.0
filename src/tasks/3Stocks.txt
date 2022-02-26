@@ -1,0 +1,36 @@
+
+<h2> Introduction to stocks</h2>
+
+A stock exchange, or stock market, is a system for buying and selling securities, or stocks and bonds. 
+A stock is a share in the ownership of a company. 
+A bond is an agreement to lend money to a company for a certain amount of time. 
+Companies sell securities to people to get the money they need to grow. 
+People buy securities as investments, or ways of possibly earning money.
+
+Many countries have one or more stock exchanges. 
+Some important exchanges are the New York Stock Exchange (in the United States), the London Stock Exchange (in England), and the Tokyo Stock Exchange (in Japan). 
+These and other exchanges do much of their business in buildings. NASDAQ, in the United States, is an exchange that does its business electronically, or online.
+
+<h2> How a stock exchange works! </h2>
+
+A number of companies belong to each stock exchange. 
+The companies sell securities to people. 
+People then use the exchange to trade (sell and buy) the securities among themselves. 
+The exchange lists the securities for sale and their prices. 
+It also handles the transfer of securities between sellers and buyers.
+
+The prices of different securities rise or fall, or both, throughout the day, every day the exchange is open. 
+People make money by selling securities at a higher price than they paid for them.
+
+<h2> Rising and falling prices </h2>
+
+Many factors affect the price of the securities of a company. 
+If a company is successful, the price of its stock usually will go up. 
+The health of the economy, laws passed by the government, and wars also can cause securities’ prices to rise or fall.
+
+Even the feelings of people can affect prices at a stock exchange. 
+For example, if people fear that prices will go down, they may start selling their securities. 
+But if many people sell large numbers of securities, they can actually make prices go down. 
+If widespread selling continues, a stock market crash can happen. 
+A crash means that the prices have fallen so low that very few people are willing to buy securities. 
+As a result, the people who own the securities have little chance of getting their money back.

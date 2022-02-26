@@ -144,8 +144,7 @@ $(function() {
       var scrollPos = $(document).scrollTop();
       $('.nav a').each(function () {
           var currLink = $(this);
-          var refElement = $(currLink.attr("href"));
-          if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+          if (window.location.pathname === currLink[0].pathname) {
               $('.nav ul li a').removeClass("active");
               currLink.addClass("active");
           }

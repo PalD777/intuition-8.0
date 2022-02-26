@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+   
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">    
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">    
+    <link rel="stylesheet" href="{{url_for('static', filename='css/responsive.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}">
+	<script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+
+
+	<div class="all-page-title page-breadcrumb">
+		<div class="container text-center">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1>NFT Space</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="menu-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>NFT Listing</h2>
+						<p>Presenting the best NFTs available on the market!</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row inner-menu-box">
+				<div class="col-3">
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">All</a>
+						
+					</div>
+				</div>
+				
+				<div class="col-9">
+					<div class="tab-content" id="v-pills-tabContent">
+						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+							<div class="row">
+								{% for nft in nfts %}
+								<div class="col-lg-4 col-md-6 special-grid nfts">
+									<div class="gallery-single fix">
+										<a onclick="buynft('{{nft.name}}', 100)">
+										<img src="{{url_for('static', filename='images/NFT/' + nft.name)}}" class="img-fluid" alt="Image">
+										<div class="why-text">
+											<h4>FinX NFTs!</h4>
+											<p>A regional refreshing nft!<br> Contains 2% alcohol</p>
+											<h5> $10 [100 FEX]</h5>
+										</a>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<<<<<<< HEAD
+	<div class="qt-box qt-background">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 ml-auto mr-auto text-center">
+					<p class="lead ">
+						"NFTs are birth certificates for the offspring of creators"
+					</p>
+					<span class="lead">Dane Scarborough</span>
+				</div>
+			</div>
+		</div>
+	</div>
+=======
+>>>>>>> 648a50ccb66723674060913fdcd2711560240b14
+	<a href="#" id="back-to-top" title="Back to top" style="display: none;"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></a>
+
+	<script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/popper.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+	<script src="{{url_for('static', filename='js/imagesloaded.js')}}"></script>
+	<script src="{{url_for('static', filename='js/isotope.js')}}"></script>
+    <script src="{{url_for('static', filename='js/nft_custom.js')}}"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+      <!-- TODO: Add SDKs for Firebase products that you want to use
+          https://firebase.google.com/docs/web/setup#available-libraries -->
+      <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.3/firebase-firestore.js"></script>
+      <script src="{{url_for('static', filename='js/fireBase.js')}}"></script>
+      <script src="{{url_for('static', filename='js/login.js')}}"></script>
+      <script src="{{url_for('static', filename='js/remove_login.js')}}"></script>
+	  <script src="{{url_for('static', filename='js/buy_nft.js')}}"></script>
+	  {% endblock %}

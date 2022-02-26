@@ -1,17 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-  <br><br><br><br><br><br>
-    <div class="container">
+<script type="text/javascript">
+  function get_task() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = '/tasks/'+user.uid;
+        }}
+    )
+}
+</script>
+    <div class="container" style="margin-top:10%"> 
       <div class="row">
         <div class="col-lg-3">
           <div class="service-item first-service">
             <div class="icon"></div>
             <h4>Tasks! </h4>
             <p>Click on the link to see your next task!</p>
+            <br>
             <div class="text-button">
-              <a href="/tasks">Read More <i class="fa fa-arrow-right"></i></a>
+              <a class='task' onclick='get_task()' style="cursor:pointer;">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -20,6 +28,8 @@
             <div class="icon"></div>
             <h4>Invest!</h4>
             <p>Use your in-game currency to invest!</p>
+            <br>
+
             <div class="text-button">
               <a href="invest.html">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
@@ -31,7 +41,7 @@
             <h4>NFTs!</h4>
             <p>Buy yourself a piece of intellectual property with in-game currency!</p>
             <div class="text-button">
-              <a href="nft.html">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="/nft_menu">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
