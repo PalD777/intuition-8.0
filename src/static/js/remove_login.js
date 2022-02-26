@@ -112,3 +112,68 @@ console.log(quantity)
         });
         
 }
+function check_price_crypto(){
+  var stock_name = $("#stock").val()
+  var quantity = $("#quantity").val()
+  console.log(stock_name)
+  console.log(quantity)
+        $.ajax({
+            data: {
+              crypto: stock_name,
+            },
+            type: "POST",
+            url: "/check_cryptoprice",
+        }).done(function (data) {
+          if(data=="0"){
+            alert(`crypto not found`)
+          }else{
+            alert(`One ${stock_name} crypto coin costs ${data} FEX`)
+          }
+            
+        });
+        
+    console.log(firebase.auth().currentUser.uid)
+  
+  }
+  function buy_crypto(){
+    alert("Trying to buy crypto")
+      var stock_name = $("#stock").val()
+  var quantity = $("#quantity").val()
+  console.log(stock_name)
+  console.log(quantity)
+  
+      $.ajax({
+              data: {
+              crypto: stock_name,
+              quantity: quantity,
+              id: firebase.auth().currentUser.uid
+              },
+              type: "POST",
+              url: "/buy_crypto",
+          }).done(function (data) {
+              alert(data)
+          });
+      
+          
+  }
+  function sell_stock_crypto(){
+    alert("Trying to sell crypto")
+      var stock_name = $("#stock").val()
+  var quantity = $("#quantity").val()
+  console.log(stock_name)
+  console.log(quantity)
+  
+  
+      $.ajax({
+              data: {
+                crypto: stock_name,
+              quantity: quantity,
+              id: firebase.auth().currentUser.uid
+              },
+              type: "POST",
+              url: "/sell_crypto",
+          }).done(function (data) {
+              alert(data)
+          });
+          
+  }

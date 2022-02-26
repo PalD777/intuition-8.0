@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- Bootstrap Styles-->
+    <link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="{{url_for('static', filename='css/font-awesome.css')}}" rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="{{url_for('static', filename='css/morris-0.4.3.min.css')}}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="{{url_for('static', filename='css/custom-styles.css')}}" rel="stylesheet" />
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='../static/input/style.css' rel='stylesheet' type='text/css' />
+
+    <style scoped>
+        footer{
+           display: none;
+        }
+        #wrapper{
+            height: 100%;
+            overflow-y: none;
+        }
+
+/* CSS */
+.button-54 {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #000;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-54:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+@media (min-width: 768px) {
+  .button-54 {
+    padding: 0.25em 0.75em;
+  }
+}
+:root {
+  --clr-primary: #fc307b;
+  --clr-accent: #2c92ef;
+
+  --fs-700: 3.5rem;
+  --fs-400: 1.25rem;
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-primary {
+  color: var(--clr-primary);
+}
+
+.text-accent {
+  color: var(--clr-secondary);
+}
+
+.fs-700 {
+  font-size: var(--fs-700);
+  line-height: 1;
+}
+
+.bg-primary {
+  background-color: var(--clr-primary);
+}
+
+.bg-accent {
+  background-color: var(--clr-accent);
+}
+
+.container {
+  padding: 0rem;
+  max-width: 75rem;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+.grid {
+  display: grid;
+  gap: var(--gap, 1rem);
+}
+
+.grid--columns {
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+}
+
+/* featured grid */
+
+.feature-grid-container {
+  perspective: 100rem;
+  position: relative;
+}
+
+
+.feature-grid {
+  position: relative;
+  z-index: -1;
+  left: min(calc(1000px - 100vw) * -1, 0px);
+  width: 55rem;
+  align-self: center;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  transform-origin: left;
+  transform: rotateY(-40deg);
+}
+
+.feature-grid > a {
+  border-radius: 0.75em;
+  transition: transform 350ms ease-in-out;
+  overflow: hidden;
+}
+
+.feature-grid > a:hover,
+.feature-grid > a:focus-visible {
+  transform: scale(1.1);
+  box-shadow: 0 0 1.5rem hsl(0 0% 100% / 0.8);
+}
+
+.feature-grid > :nth-child(1),
+.feature-grid > :nth-child(4),
+.feature-grid > :nth-child(5),
+.feature-grid > :nth-child(7) {
+  grid-row: span 3;
+}
+
+.feature-grid > :nth-child(2),
+.feature-grid > :nth-child(3) {
+  grid-row: span 2;
+}
+
+.feature-grid > :nth-child(6) {
+  grid-column: 2 / span 2;
+  grid-row: 3 / span 4;
+}
+
+    </style>
+    <div id="wrapper">
+
+        <div id="page-wrapper">
+            <div id="page-inner" style="margin: 0px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Purchase and sell cryto 
+                        </h1>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="card">
+                    <h2>Crypto Control</h2><br><br>
+                    <label class="input">
+                      <input class="input__field" type="text" placeholder=" "  id="stock"/>
+                      <span class="input__label">Crypto Name</span>
+                    </label>
+                    <br><br>
+                    <label class="input">
+                      <input class="input__field" type="text" placeholder=" " id="quantity" />
+                      <span class="input__label">Quantity</span>
+                    </label>
+                    <br>
+                    <div class="button-group">
+                      <button onclick="check_price_crypto()">Get Crypto Price</button>
+                      <button onclick="sell_crypto()">Sell Crypto</button>
+                      <button onclick="buy_crypto()">Buy Crypto</button>
+                    </div>
+                  </div>
+                    
+
+ 
+                <!-- /. ROW  -->
+                <main style="margin-top: 15%;">
+                    <section>
+                      <div class="container">
+                        <div class="feature-grid-container grid grid--columns">
+                          <div class="feature-grid-text">
+                            <h2 class="fs-700 uppercase text-compressed">WITH BLOCKCHAIN, TRADING WILL <span class="text-primary">NEVER</span>
+                              HAVE TO
+                              REMAIN CENTRALIZED</h2>
+                            <br><br>
+                            
+                          </div>
+                          <div class="grid feature-grid">
+                            <a href="#" aria-label="Low fees"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Fees.png" alt=""></a>
+                            <a href="#" aria-label="DLO-Brick"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Brick.png" alt=""></a>
+                            <a href="#" aria-label="Safe and simple"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Safe.png" alt=""></a>
+                            <a href="#" aria-label="Synthetic curve"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Sythetic.png" alt=""></a>
+                            <a href="#" aria-label="Anti slippage"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Anti.png" alt=""></a>
+                            <a href="#" aria-label="Dex liquidity oracle"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/DLO.png" alt=""></a>
+                            <a href="#" aria-label="Liquidity difference force multiplier"><img src="https://raw.githubusercontent.com/kevin-powell/3d-grid-clone/main/images/Force.png" alt=""></a>
+                          </div>
+                
+                        </div>
+                    </section>
+                  </main>
+                
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <!-- Bootstrap Js -->
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <!-- Morris Chart Js -->
+    <script src="{{url_for('static', filename='js/raphael-2.1.0.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/morris.js')}}"></script>
+    <!-- Custom Js -->
+    <script src="{{url_for('static', filename='js/custom-scripts.js')}}"></script>
+
+{% endblock %} 

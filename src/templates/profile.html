@@ -230,6 +230,15 @@ button.primary.ghost {
 			
 		</ul>
 	</div>
+    <div class="skills">
+		<h6>Crypto purchase</h6>
+		<ul>
+            {% for nft in data["cryptos"] %}
+                                            <li>{{nft["quantity"]}} {{nft["cryptoname"]}}</li>
+            {% endfor %}
+			
+		</ul>
+	</div>
 </div>
 </container>
 

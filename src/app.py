@@ -29,8 +29,36 @@ def get_stockprice():
         price = si.get_live_price(stockname)
         return str(price)
     except:
-        return( "0")
+        return("0")
 
+@app.route("/check_cryptoprice",methods=["POST"])
+def check_cryptoprice():
+    from get_crypto_price import get_crypto_price
+    stockname= request.form["crypto"]
+    try:
+        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        if price == None:
+            price = 0
+    except:
+        price = 0
+    return str(price)
+
+@app.route("/buy_crypto",methods=["POST"])
+def buy_crypto():
+    from get_crypto_price import get_crypto_price
+    stockname= request.form["crypto"]
+    try:
+        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+    except:
+        price = None
+    if price:
+        quantity = int(request.form["quantity"])
+        total_price = price*int(quantity)
+        id = request.form["id"]
+        to_retun = buy_utility(stockname, price, quantity, total_price, id,'crypto')
+        return to_retun
+    else:
+        return("Crypto not found")
 @app.route("/buy_stock",methods=["POST"])
 def buy_stock():
     from yahoo_fin import stock_info as si
@@ -43,41 +71,46 @@ def buy_stock():
         quantity = int(request.form["quantity"])
         total_price = price*int(quantity)
         id = request.form["id"]
-        old_data = get_dict_for_document_and_collection(id,'data')
-        existing_stocks=old_data['stocks']
-        if not existing_stocks:
-            existing_stocks = []
-        if total_price<=old_data["coins"]:
-            stock_changed=False
-            for i in existing_stocks:
-                if i["stockname"] == stockname:
-                    i["quantity"]=int(i["quantity"])+int(quantity)
-                    i["price_buy"]=int(i["price_buy"]+price)/i["quantity"]
+        to_retun = buy_utility(stockname, price, quantity, total_price, id,'stock')
+        return to_retun
+    else:
+        return("Stock not found")
+
+def buy_utility(stockname, price, quantity, total_price, id,utility_name):
+    old_data = get_dict_for_document_and_collection(id,'data')
+    existing_stocks=old_data[f'{utility_name}s']
+    if not existing_stocks:
+        existing_stocks = []
+    if total_price<=old_data["coins"]:
+        stock_changed=False
+        for i in existing_stocks:
+            if i[f"{utility_name}name"] == stockname:
+                i["quantity"]=int(i["quantity"])+int(quantity)
+                i["price_buy"]=int(i["price_buy"]+price)/i["quantity"]
                     
-                    stock_changed=True
-                    break
-            if stock_changed==False:
-                existing_stocks.append({
-                    'stockname':stockname,
+                stock_changed=True
+                break
+        if stock_changed==False:
+            existing_stocks.append({
+                    f'{utility_name}name':stockname,
                     'quantity':quantity,
                     'price_buy':price
                 })
-            db = firestore.client()
-            doc_ref = db.collection(u'data').document(id)
-            data = {
-                u'stocks': existing_stocks
+        db = firestore.client()
+        doc_ref = db.collection(u'data').document(id)
+        data = {
+                f'{utility_name}s': existing_stocks
             }
-            doc_ref.set(data,merge=True)
-            return(f"{quantity} {stockname} stocks bought for {total_price} FEX")
-        else:
-            return("Not enough money to buy the stock")
+        doc_ref.set(data,merge=True)
+        to_retun=f"{quantity} {stockname} {utility_name}s bought for {total_price} FEX"
     else:
-        return("Stock not found")
+        to_retun=f"Not enough money to buy the {utility_name}"
+    return to_retun
 
 @app.route("/sell_stock",methods=["POST"])
 def sell_stock():
     from yahoo_fin import stock_info as si
-    stockname= request.form["stock"]
+    stockname= request.form["crypto"]
     try:
         price = si.get_live_price(stockname)
     except:
@@ -87,32 +120,55 @@ def sell_stock():
         total_price = price*quantity
         id = request.form["id"]
         old_data = get_dict_for_document_and_collection(id,'data')
-        existing_stocks=old_data['stocks']
-        stock_number=0
-        for stocks in existing_stocks:
-            if stocks['stockname']==stockname:
-                old_quantity= int(stocks["quantity"])
-                if int(quantity)<=int(stocks["quantity"]):
-                    stocks["quantity"]=int(stocks["quantity"])-quantity
-                    if int(stocks["quantity"])==0:
-                        existing_stocks.pop(stock_number)
-                    total_money_to_add= quantity*price
-                    print(stocks["quantity"]*stocks["price_buy"])
-                    total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
-                    new_coins= old_data["coins"]+total_money_to_add
-                    db = firestore.client()
-                    doc_ref = db.collection(u'data').document(id)
-                    data = {
-                        u'stocks': existing_stocks,
-                        u'coins':new_coins,
-                    }
-                    doc_ref.set(data,merge=True)
-                    return(f"{quantity} {stockname} stocks sold for {total_profit} FEX profit")
-            stock_number+=1
-        else:
-            return("Not enough quantity of stock to sell it")
+        to_return = sell_comodity(stockname, price, quantity, id, old_data,'stock')
+        return to_return
     else:
         return("Stock not found")
+
+@app.route("/sell_crypto",methods=["POST"])
+def sell_crypto():
+    from get_crypto_price import get_crypto_price
+    stockname= request.form["crypto"]
+    try:
+        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+    except:
+        price = None
+    if price:
+        quantity = int(request.form["quantity"])
+        total_price = price*quantity
+        id = request.form["id"]
+        old_data = get_dict_for_document_and_collection(id,'data')
+        to_return = sell_comodity(stockname, price, quantity, id, old_data,'crypto')
+        return to_return
+    else:
+        return("Crypto not found")
+
+def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
+    existing_stocks=old_data[f'{utility_name}s']
+    stock_number=0
+    for stocks in existing_stocks:
+        if stocks[f'{utility_name}name']==stockname:
+            old_quantity= int(stocks["quantity"])
+            if int(quantity)<=int(stocks["quantity"]):
+                stocks["quantity"]=int(stocks["quantity"])-quantity
+                if int(stocks["quantity"])==0:
+                    existing_stocks.pop(stock_number)
+                total_money_to_add= quantity*price
+                print(stocks["quantity"]*stocks["price_buy"])
+                total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
+                new_coins= old_data["coins"]+total_money_to_add
+                db = firestore.client()
+                doc_ref = db.collection(u'data').document(id)
+                data = {
+                        f'{utility_name}s': existing_stocks,
+                        u'coins':new_coins,
+                    }
+                doc_ref.set(data,merge=True)
+                to_return = f"{quantity} {stockname} {utility_name}s sold for {total_profit} FEX profit"
+        stock_number+=1
+    else:
+        to_return = f"Not enough quantity of {utility_name} to sell it"
+    return to_return
 
 @app.route("/setupfirebase", methods=["POST"])
 def make_database_from_info():
@@ -130,7 +186,8 @@ def make_database_from_info():
             u'courses':[],
             u'current_course':0,
             u'conv_rate':10,
-            u'stocks':[]
+            u'stocks':[],
+            u'cryptos':[]
         }
         doc_ref.set(data)
     return "Made Database"
@@ -241,6 +298,11 @@ def support():
 def invest():
     '''Displays form page'''
     return render_template("invest.html")
+
+@app.route("/crypto", methods=['GET'])
+def crypto():
+    '''Displays form page'''
+    return render_template("crypto.html")
 
 @app.route("/tasks/<id>", methods=['GET'])
 def tasks(id):
