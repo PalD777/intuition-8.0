@@ -184,6 +184,15 @@
   
 }
 </style>
+<script type="text/javascript">
+  function get_user_url(base) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = '/' + base+ '/' + user.uid;
+        }}
+    )
+}
+</script>
   <div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
     <div class="container">
       <div class="row">
@@ -251,7 +260,7 @@
             <h4>Invest!</h4>
             <p>Use your in-game currency to invest!</p><br>
             <div class="text-button">
-              <a href="invest.html"> Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="/index"> Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
@@ -261,17 +270,17 @@
             <h4>NFTs!</h4>
             <p>Buy yourself an NFT with our in-game currency!</p>
             <div class="text-button">
-              <a href="nft.html">Read More <i class="fa fa-arrow-right"></i></a>
+              <a class='nft' onclick="get_user_url('nft_menu')" style="cursor:pointer;">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
         <div class="col-lg-3">
           <div class="service-item fourth-service">
             <div class="icon"></div>
-            <h4>24/7 Help &amp; Support</h4>
-            <p>A support form available for any issues that may arise!</p>
+            <h4>View Blockchain!</h4>
+            <p>View your transfactions on the blockchain!</p>
             <div class="text-button">
-              <a href="support.html">Read More <i class="fa fa-arrow-right"></i></a>
+              <a href="/see_blockchain">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
