@@ -29,7 +29,7 @@ def get_stockprice():
     from yahoo_fin import stock_info as si
     stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
         return str(price)
     except:
         return("0")
@@ -39,7 +39,7 @@ def check_cryptoprice():
     from get_crypto_price import get_crypto_price
     stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")), 2)
         if price == None:
             price = 0
     except:
@@ -51,7 +51,7 @@ def buy_crypto():
     from get_crypto_price import get_crypto_price
     stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")),2)
     except:
         price = None
     if price:
@@ -67,7 +67,7 @@ def buy_stock():
     from yahoo_fin import stock_info as si
     stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
     except:
         price = None
     if price:
@@ -115,7 +115,7 @@ def sell_stock():
     from yahoo_fin import stock_info as si
     stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
     except:
         price = None
     if price:
@@ -133,7 +133,7 @@ def sell_crypto():
     from get_crypto_price import get_crypto_price
     stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")), 2)
     except:
         price = None
     if price:
@@ -158,7 +158,7 @@ def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
                     existing_stocks.pop(stock_number)
                 total_money_to_add= quantity*price
                 print(stocks["quantity"]*stocks["price_buy"])
-                total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
+                total_profit= - (old_quantity*stocks["price_buy"]) + total_money_to_add
                 new_coins= old_data["coins"]+total_money_to_add
                 db = firestore.client()
                 doc_ref = db.collection(u'data').document(id)

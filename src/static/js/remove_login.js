@@ -156,7 +156,7 @@ function check_price_crypto(){
       
           
   }
-  function sell_stock_crypto(){
+  function sell_crypto(){
     alert("Trying to sell crypto")
       var stock_name = $("#stock").val()
   var quantity = $("#quantity").val()
