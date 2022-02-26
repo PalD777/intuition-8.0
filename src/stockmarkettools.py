@@ -4,9 +4,7 @@ from flask import Flask, request, render_template
 import pandas as pd
 import matplotlib
 import matplotlib.pyplot as plt
-from pretty_html_table import build_table
 import requests
-from create_strategy import get_starategy
 
 matplotlib.use('Agg')
 app = Flask(__name__)
