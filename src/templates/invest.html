@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-8 offset-lg-2">
+    <div class="section-heading">
+      <br><br><br><br><br><h4>What stock would you like to purchase? </h4><br><br>
+    </div>
+  </div>
+  <div class="col-lg-6 offset-lg-3">
+    <form id="search" action="#" method="GET">
+      <div class="row"> 
+        <div class="col-lg-6 col-sm-6">
+          <fieldset>
+            <input type="text" name="stock" class="stock" placeholder="Stock..." autocomplete="on" required>
+          </fieldset>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <fieldset>
+            <input type="text" name="quantity" class="quantity" placeholder="Quantity..." autocomplete="on" required>
+          </fieldset>
+        </div>
+
+        <br><br><br>
+        <div class="col-lg-6 col-sm-6">
+          <fieldset>
+            <button value = "Calculate" class="main-button"> Calculate <i class="fa fa-angle-right"></i></button>
+          </fieldset>
+        </div>
+        
+        <div class="col-lg-6 col-sm-6">
+          <fieldset>
+            <button type="submit" class="main-button" value = "submit"> Submit <i class="fa fa-angle-right"></i></button>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+{% endblock %}

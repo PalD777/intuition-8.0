@@ -33,6 +33,11 @@ def support():
     '''Displays form page'''
     return render_template("support.html")
 
+@app.route("/invest", methods=['GET'])
+def invest():
+    '''Displays form page'''
+    return render_template("invest.html")
+
 @app.route("/tasks", methods=['GET'])
 def tasks():
     '''Displays form page'''
@@ -47,5 +52,5 @@ def get_tasks():
 if __name__ == "__main__":
     get_tasks()
     print(tasks_data)
-    user.task_no = 1
+    user.task_no = 0
     app.run(debug = True)

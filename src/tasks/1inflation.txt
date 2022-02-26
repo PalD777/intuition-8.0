@@ -1,3 +1,9 @@
-Lorem Ipsum
-Hello World!
-Inflation Text here!!!
+<b>Inflation</b> means that the general level of prices is going up, the opposite of deflation. 
+More money will need to be paid for goods (like a loaf of bread) and services (like getting a haircut at the hairdresser's). 
+Economists measure inflation regularly to know an economy's state.
+Inflation changes the ratio of money towards goods or services; more money is needed to get the same amount of a good or service, or the same amount of money will get a lower amount of a good or service. 
+Economists defined certain customer baskets to be able to measure inflation. There can be positive and negative effects of inflation.
+
+<br><h2><b>Causes of inflation</b></h2>
+When the total money in an economy (the money supply) increases too rapidly, the quality of the money (the currency value) often decreases. Economists generally think that the increased money supply (monetary inflation) causes the price of goods/services price to increase (price inflation) over a longer period. They disagree on causes over a shorter period
+
