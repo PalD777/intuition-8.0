@@ -5,6 +5,7 @@ import firebase_admin
 from firebase_admin import firestore
 import math
 from .blockchain import Blockchain, Transaction
+import logging
 
 # Sets up the Flask application
 app = Flask(__name__)
@@ -15,6 +16,8 @@ cred_obj = firebase_admin.credentials.Certificate(
     Path(__file__).parent / 'nft-finex-firebase-adminsdk-ke1a6-700f704fe4.json')
 default_app = firebase_admin.initialize_app(cred_obj)
 blockchain = Blockchain()
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 
 @app.route("/", methods=["GET"])
