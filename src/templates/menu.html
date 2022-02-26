@@ -42,15 +42,15 @@
 					<div class="tab-content" id="v-pills-tabContent">
 						<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
 							<div class="row">
-								{% for nft in nfts %}
+								{% for nft, price in data %}
 								<div class="col-lg-4 col-md-6 special-grid nfts">
 									<div class="gallery-single fix">
-										<a onclick="buynft('{{nft.name}}', 100)">
-										<img src="{{url_for('static', filename='images/NFT/' + nft.name)}}" class="img-fluid" alt="Image">
+										<a onclick="buynft('{{nft}}', {{conv * price}})">
+										<img src="{{url_for('static', filename='images/NFT/' + nft)}}" class="img-fluid" alt="Image">
 										<div class="why-text">
 											<h4>FinX NFTs!</h4>
 											<p>Select among the best NFTs in the world!</p>
-											<h5> $10 [{{10*conv}} FEX]</h5>
+											<h5> ${{price}} [{{price*conv}} FEX]</h5>
 										</a>
 										</div>
 									</div>

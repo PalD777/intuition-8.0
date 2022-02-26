@@ -1,4 +1,4 @@
-function buynft(nft,price){
+function buynft(nft, price){
     alert('Transaction in progress')
 
     firebase.auth().onAuthStateChanged(function (user) {

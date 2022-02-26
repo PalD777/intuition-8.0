@@ -5,7 +5,7 @@
   function get_user_url(base) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            window.location.href = '/' + base+ '/' + user.uid;
+            window.location.href = '/' + base + '/' + user.uid;
         }}
     )
 }
@@ -19,7 +19,7 @@
             <p>Click on the link to see your next task!</p>
             <br>
             <div class="text-button">
-              <a class='task' onclick='get_user_url("task")' style="cursor:pointer;">Read More <i class="fa fa-arrow-right"></i></a>
+              <a class='task' onclick='get_user_url("tasks")' style="cursor:pointer;">Read More <i class="fa fa-arrow-right"></i></a>
             </div>
           </div>
         </div>
