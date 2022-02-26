@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A service to take orders from customers in the S&P Restaurant.">
+    <meta name="author" content="S&P Restaurant Co.">
+
+    <title>S&P Restaurant</title>
+<!--
+    
+TemplateMo 558 Klassy Cafe
+
+https://templatemo.com/tm-558-klassy-cafe
+
+-->
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/S&PR.css')}}">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='css/owl-carousel.min.css')}}">
+
+    </head>
+    
+    <body>
+    
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+    
+    
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="{{url_for('static', filename='images/logo.png')}}" style='width: 153px; height: 55px;'>
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li class="scroll-to-section"><a href="/#top">Home</a></li>
+                            <li class="scroll-to-section"><a href="/#about">About</a></li>
+                            <li class="scroll-to-section"><a href="/#menu">Menu</a></li>
+                            <li class="scroll-to-section"><a href="/cart">Cart</a></li> 
+                            <li class="scroll-to-section"><a href="/qr">Order from your Device</a></li> 
+                        </ul>        
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    {% block content %}{% endblock %}
+
+    <!-- ***** Footer Start ***** -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-xs-12">
+                    <div class="right-text-content">
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="logo">
+                        <a href="/"><img src="{{url_for('static', filename='images/white-logo.png')}}" alt="" style='width: 230px; height: 90px;'></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-12">
+                    <div class="left-text-content">
+                        <p>© Copyright S&P Restaurant Co.
+                        
+                        <br>Design: TemplateMo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="{{url_for('static', filename='js/jquery-3.6.0.min.js')}}"></script>
+    
+
+    <!-- Plugins -->
+    <script src="{{url_for('static', filename='js/S&PR.min.js')}}"></script>
+  </body>
+</html>
