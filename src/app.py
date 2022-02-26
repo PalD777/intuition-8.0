@@ -94,21 +94,21 @@ def sell_stock():
                 old_quantity= int(stocks["quantity"])
                 if int(quantity)<=int(stocks["quantity"]):
                     stocks["quantity"]=int(stocks["quantity"])-quantity
-                if int(stocks["quantity"])==0:
-                    existing_stocks.pop(stock_number)
-                total_money_to_add= quantity*price
-                print(stocks["quantity"]*stocks["price_buy"])
-                total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
-                new_coins= old_data["coins"]+total_money_to_add
-                db = firestore.client()
-                doc_ref = db.collection(u'data').document(id)
-                data = {
-                    u'stocks': existing_stocks,
-                    u'coins':new_coins,
-                }
-                doc_ref.set(data,merge=True)
+                    if int(stocks["quantity"])==0:
+                        existing_stocks.pop(stock_number)
+                    total_money_to_add= quantity*price
+                    print(stocks["quantity"]*stocks["price_buy"])
+                    total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
+                    new_coins= old_data["coins"]+total_money_to_add
+                    db = firestore.client()
+                    doc_ref = db.collection(u'data').document(id)
+                    data = {
+                        u'stocks': existing_stocks,
+                        u'coins':new_coins,
+                    }
+                    doc_ref.set(data,merge=True)
+                    return(f"{quantity} {stockname} stocks sold for {total_profit} FEX profit")
             stock_number+=1
-            return(f"{quantity} {stockname} stocks sold for {total_profit} FEX profit")
         else:
             return("Not enough quantity of stock to sell it")
     else:
