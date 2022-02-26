@@ -211,7 +211,11 @@ def show_leaderboard():
     for i in doc:
         list_of_all_users.append(i.to_dict())
     list_of_all_users = sorted(list_of_all_users, key=lambda d: d['coins'],reverse=True) 
-    return render_template('leaderboard.html',list_of_users=list_of_all_users[:5])
+    if len(list_of_all_users)>5:
+        list_of_users=list_of_all_users[:5]
+    else:
+        list_of_users=list_of_all_users
+    return render_template('leaderboard.html',list_of_users=list_of_users)
 
 
 @app.route("/nft_menu/<id>", methods=['GET'])

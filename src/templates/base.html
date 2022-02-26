@@ -53,9 +53,11 @@ https://templatemo.com/tm-570-chain-app-dev
           firebase.auth().onAuthStateChanged(function (user) {
               if (user) {
                   window.location.href = '/' + base+ '/' + user.uid;
+              }else{
+                alert("Please log in to view!")
               }}
           )
-      }
+          }
       </script>
   </head>
 
