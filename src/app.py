@@ -226,6 +226,7 @@ def add_course_money():
         new_money = int(existing_data['coins']) + 300
         courses_done.append(course[1:])
         courses_done = list(set(courses_done)) # Remove duplicate entries
+        get_tasks()
         task_list = sorted(tasks_data.keys())
         task_no = task_list.index(course) + 1
         db = firestore.client()
@@ -307,12 +308,16 @@ def crypto():
 @app.route("/tasks/<id>", methods=['GET'])
 def tasks(id):
     '''Displays course page'''
+    get_tasks()
     existing_data = get_dict_for_document_and_collection(id, 'data')
     if not existing_data['current_course']:
         task_no = 0
     else:
         task_no = int(existing_data['current_course'])
     task_list = sorted(tasks_data.keys())
+    print(task_no)
+    print(task_list)
+    print(tasks_data)
     if task_no >= len(task_list):
         return render_template("congratulations.html")
     key = task_list[task_no]
