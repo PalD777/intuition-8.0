@@ -4,7 +4,7 @@ from flask_cors import CORS
 import firebase_admin
 from firebase_admin import firestore
 import math
-from blockchain import Blockchain, Transaction
+from .blockchain import Blockchain, Transaction
 import logging
 
 # Sets up the Flask application
