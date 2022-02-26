@@ -6,4 +6,7 @@ Economists defined certain customer baskets to be able to measure inflation. The
 
 <br><h2><b>Causes of inflation</b></h2>
 When the total money in an economy (the money supply) increases too rapidly, the quality of the money (the currency value) often decreases. Economists generally think that the increased money supply (monetary inflation) causes the price of goods/services price to increase (price inflation) over a longer period. They disagree on causes over a shorter period
-
+<center>
+     <button onclick = "conv_change(2);" name = "infln"> Click here to experience inflation! </button>
+</center>
+<script src="/static/js/conv_change.js"></script>

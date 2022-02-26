@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script type="text/javascript">
+  function get_user_url(base) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            window.location.href = '/' + base + '/' + user.uid;
+        }}
+    )
+}
+</script>
+<script src="/static/js/conv_change.js"></script>
 <div class="row">
     <div class="col-lg-8 offset-lg-2">
       <div class="section-heading">
-        <br><br><br><br><br><br><br><br><h1>Congratulations for completing all the courses!<br> <br><br>You can visit <a href='/nft_menu'>NFT Menu</a> to purchase nfts with your FEX coins</h1><br><br>
+        <br><br><br><br><br><br><br><br><h1>Congratulations for completing all the courses!<br> <br><br>You can visit <a class='nft' onclick="get_user_url('nft_menu')" style="cursor:pointer;">NFT Menu</a> to purchase nfts with your FEX coins</h1><br><br>
+        <center>
+          <button onclick = "conv_change(2);" name = "infln"> Click here to experience inflation! </button>
+        </center>
+        <center>
+          <button onclick = "conv_change(1/2);" name = "defln"> Click here to experience deflation! </button>
+        </center>
       </div>
     </div>
     </div>
