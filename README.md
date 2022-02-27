@@ -7,6 +7,7 @@
 
 <br />
 <div align="center">
+
   <a href="https://github.com/PalD777/intuition-8.0">
     <img src="src/static/images/icon-192x192.png" alt="Logo" width="192" height="192">
   </a>
@@ -16,6 +17,7 @@
   <p align="center">
     A Financial Literacy solution
     <br />
+
     <a href="https://github.com/PalD777/intuition-8.0"><strong>Explore the docs »</strong></a>
     <br />
     <br />

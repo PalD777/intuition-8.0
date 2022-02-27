@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
-    <title>Chain App Dev - App Landing Page HTML5 Template</title>
+    <title>FinX - Financial Literacy</title>
     
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
@@ -53,9 +53,11 @@ https://templatemo.com/tm-570-chain-app-dev
           firebase.auth().onAuthStateChanged(function (user) {
               if (user) {
                   window.location.href = '/' + base+ '/' + user.uid;
+              }else{
+                alert("Please log in to view!")
               }}
           )
-      }
+          }
       </script>
   </head>
 
@@ -93,6 +95,8 @@ https://templatemo.com/tm-570-chain-app-dev
               <li class="scroll-to-section"><a href="/invest">Invest</a></li>
               <li class="scroll-to-section"><a href="/crypto">Crypto</a></li>
               <li class="scroll-to-section"><a class='nft' onclick="get_user_url('nft_menu')" style="cursor:pointer;">NFTs</a></li>
+              <li class="scroll-to-section"><a href="/show_leaderboard">Leaderboard</a></li>
+
               <li class="scroll-to-section" id="profile"><a>Profile</a> </li>
               <li class="scroll-to-section" id='logout' >
                         <a>Logout</a>

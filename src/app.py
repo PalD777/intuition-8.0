@@ -5,6 +5,7 @@ import firebase_admin
 from firebase_admin import firestore
 import math
 from .blockchain import Blockchain, Transaction
+import logging
 
 # Sets up the Flask application
 app = Flask(__name__)
@@ -15,6 +16,8 @@ cred_obj = firebase_admin.credentials.Certificate(
     Path(__file__).parent / 'nft-finex-firebase-adminsdk-ke1a6-700f704fe4.json')
 default_app = firebase_admin.initialize_app(cred_obj)
 blockchain = Blockchain()
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 
 @app.route("/", methods=["GET"])
@@ -26,7 +29,7 @@ def get_stockprice():
     from yahoo_fin import stock_info as si
     stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
         return str(price)
     except:
         return("0")
@@ -34,9 +37,9 @@ def get_stockprice():
 @app.route("/check_cryptoprice",methods=["POST"])
 def check_cryptoprice():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")), 2)
         if price == None:
             price = 0
     except:
@@ -46,9 +49,9 @@ def check_cryptoprice():
 @app.route("/buy_crypto",methods=["POST"])
 def buy_crypto():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")),2)
     except:
         price = None
     if price:
@@ -64,7 +67,7 @@ def buy_stock():
     from yahoo_fin import stock_info as si
     stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
     except:
         price = None
     if price:
@@ -85,9 +88,9 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
         stock_changed=False
         for i in existing_stocks:
             if i[f"{utility_name}name"] == stockname:
+                old_quantity=i["price_buy"]
                 i["quantity"]=int(i["quantity"])+int(quantity)
-                i["price_buy"]=int(i["price_buy"]+price)/i["quantity"]
-                    
+                i["price_buy"]=(i["price_buy"]*old_quantity+price*quantity)/i["quantity"]
                 stock_changed=True
                 break
         if stock_changed==False:
@@ -96,10 +99,12 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
                     'quantity':quantity,
                     'price_buy':price
                 })
+        new_coins= old_data["coins"]-total_price
         db = firestore.client()
         doc_ref = db.collection(u'data').document(id)
         data = {
-                f'{utility_name}s': existing_stocks
+                f'{utility_name}s': existing_stocks,
+                'coins':new_coins
             }
         doc_ref.set(data,merge=True)
         to_retun=f"{quantity} {stockname} {utility_name}s bought for {total_price} FEX"
@@ -110,9 +115,9 @@ def buy_utility(stockname, price, quantity, total_price, id,utility_name):
 @app.route("/sell_stock",methods=["POST"])
 def sell_stock():
     from yahoo_fin import stock_info as si
-    stockname= request.form["crypto"]
+    stockname= request.form["stock"]
     try:
-        price = si.get_live_price(stockname)
+        price = round(float(si.get_live_price(stockname)), 2)
     except:
         price = None
     if price:
@@ -128,9 +133,9 @@ def sell_stock():
 @app.route("/sell_crypto",methods=["POST"])
 def sell_crypto():
     from get_crypto_price import get_crypto_price
-    stockname= request.form["crypto"]
+    stockname= request.form["crypto"].lower()
     try:
-        price = get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")
+        price = round(float(get_crypto_price(source = "bitstamp", crypto=stockname, pair = "usdt")), 2)
     except:
         price = None
     if price:
@@ -154,8 +159,7 @@ def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
                 if int(stocks["quantity"])==0:
                     existing_stocks.pop(stock_number)
                 total_money_to_add= quantity*price
-                print(stocks["quantity"]*stocks["price_buy"])
-                total_profit=(old_quantity*stocks["price_buy"]) - total_money_to_add
+                total_profit=  total_money_to_add - (quantity*stocks["price_buy"])
                 new_coins= old_data["coins"]+total_money_to_add
                 db = firestore.client()
                 doc_ref = db.collection(u'data').document(id)
@@ -165,9 +169,9 @@ def sell_comodity(stockname, price, quantity, id, old_data,utility_name):
                     }
                 doc_ref.set(data,merge=True)
                 to_return = f"{quantity} {stockname} {utility_name}s sold for {total_profit} FEX profit"
+            else:
+                to_return = f"Not enough quantity of {utility_name} to sell it"
         stock_number+=1
-    else:
-        to_return = f"Not enough quantity of {utility_name} to sell it"
     return to_return
 
 @app.route("/setupfirebase", methods=["POST"])
@@ -198,6 +202,22 @@ def request_fields_from_form():
     photoURL = request.form["photoURL"]
     return name, id, photoURL
 
+@app.route("/show_leaderboard", methods=['GET'])
+def show_leaderboard():
+    db = firestore.client()
+    doc_ref = db.collection('data')
+    doc = doc_ref.get()
+    list_of_all_users=[]
+    for i in doc:
+        list_of_all_users.append(i.to_dict())
+    list_of_all_users = sorted(list_of_all_users, key=lambda d: d['coins'],reverse=True) 
+    if len(list_of_all_users)>5:
+        list_of_users=list_of_all_users[:5]
+    else:
+        list_of_users=list_of_all_users
+    return render_template('leaderboard.html',list_of_users=list_of_users)
+
+
 @app.route("/nft_menu/<id>", methods=['GET'])
 def getnfts(id):
     existing_data = get_dict_for_document_and_collection(id, 'data')
@@ -226,6 +246,7 @@ def add_course_money():
         new_money = int(existing_data['coins']) + 300
         courses_done.append(course[1:])
         courses_done = list(set(courses_done)) # Remove duplicate entries
+        get_tasks()
         task_list = sorted(tasks_data.keys())
         task_no = task_list.index(course) + 1
         db = firestore.client()
@@ -307,12 +328,16 @@ def crypto():
 @app.route("/tasks/<id>", methods=['GET'])
 def tasks(id):
     '''Displays course page'''
+    get_tasks()
     existing_data = get_dict_for_document_and_collection(id, 'data')
     if not existing_data['current_course']:
         task_no = 0
     else:
         task_no = int(existing_data['current_course'])
     task_list = sorted(tasks_data.keys())
+    print(task_no)
+    print(task_list)
+    print(tasks_data)
     if task_no >= len(task_list):
         return render_template("congratulations.html")
     key = task_list[task_no]
@@ -358,5 +383,5 @@ def get_tasks():
 
 if __name__ == "__main__":
     get_tasks()
-    app.run(debug = True)
+    app.run(debug=True)
 

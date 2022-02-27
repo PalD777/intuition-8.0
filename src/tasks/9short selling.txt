@@ -10,7 +10,7 @@ The most common reasons for engaging in short selling are speculation and hedgin
 People may also sell short in order to hedge a long position. For instance, if you own call options (which are long positions) you may want to sell short against that position to lock in profits. Or, if you want to limit downside losses without actually exiting a long stock position you can sell short in a stock that is closely related or highly correlated with it.
 
 <b>Pros and Cons of Short Selling</b>
-Pros
+<b>Pros</b>
 <ul>
 <li>Possibility of high profits</li>
 <li>Little initial capital required</li>
@@ -18,12 +18,9 @@ Pros
 <li>Hedge against other holdings</li>
 </ul>
 
-Cons
+<b>Cons</b>
 <ul>
 <li>Potentially unlimited losses</li>
 <li> Margin account necessary</li>
 <li> Margin interest incurred</li>
 <li> Short Squeezes </li>
-
-<iframe width = "1280" height = "720" src="https://www.youtube.com/watch?v=Z1LctxzEREE">
-</iframe>
