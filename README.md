@@ -7,7 +7,7 @@
 
 <br />
 <div align="center">
-  <a href="https://github.com/PalD777/intuition-8.0">
+  <a href="https://github.com/PalD777/intuition-8.0/tree/production">
     <img src="src/static/images/icon-192x192.png" alt="Logo" width="192" height="192">
   </a>
 
@@ -16,7 +16,7 @@
   <p align="center">
     A Financial Literacy solution
     <br />
-    <a href="https://github.com/PalD777/intuition-8.0"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/PalD777/intuition-8.0/tree/production"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/PalD777/intuition-8.0/issues">Report Bug</a>
@@ -39,7 +39,7 @@
   </ol>
 </details>
 
-# Installation
+## Installation
 To install the required modules, use pip install -r "requirements.txt"
 
 <p align="right">(<a href="#top">back to top</a>)</p>
