@@ -11,6 +11,8 @@ function profile() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             window.location.href = '/profile/'+user.uid;
+        }else{
+          alert("Please log in!")
         }}
     )
 }
