@@ -39,7 +39,7 @@
   </ol>
 </details>
 
-# Installation
+## Installation
 To install the required modules, use pip install -r "requirements.txt"
 
 <p align="right">(<a href="#top">back to top</a>)</p>
