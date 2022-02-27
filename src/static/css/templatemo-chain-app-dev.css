@@ -344,24 +344,19 @@ header
 
 .header-area .main-nav {
   min-height: 80px;
-  background: transparent;
+  max-height: 80px;
+  background: transparent;  
 }
 
 .header-area .main-nav .logo {
   float: left;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
+
 }
 
 .header-area .main-nav .logo {
     line-height: 100px;
     float: left;
-    -webkit-transition: all 0.3s ease 0s;
-    -moz-transition: all 0.3s ease 0s;
-    -o-transition: all 0.3s ease 0s;
-    transition: all 0.3s ease 0s;
+    
 }
 
 .background-header .main-nav .logo {
@@ -393,21 +388,6 @@ header
 .header-area .main-nav .nav li:nth-child(6) {
   padding-right: 0px;
   padding-left: 40px;
-}
-
-.header-area .main-nav .nav li:last-child a ,
-.background-header .main-nav .nav li:last-child a,
-.header-area .main-nav .nav li:nth-child(6) a ,
-.background-header .main-nav .nav li:nth-child(6) a {
-  padding: 0px 20px !important;
-  font-weight: 400;
-}
-
-.header-area .main-nav .nav li:last-child a:hover ,
-.background-header .main-nav .nav li:last-child a:hover,
-.header-area .main-nav .nav li:nth-child(6) a:hover ,
-.background-header .main-nav .nav li:nth-child(6) a:hover {
-  color: #fff !important;
 }
 
 .header-area .main-nav .nav li a {
@@ -470,7 +450,6 @@ header
   transform: translateY(+2em);
   visibility: hidden;
   z-index: -1;
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
 
 .header-area .main-nav .nav li.submenu ul li {
@@ -694,6 +673,7 @@ header
     box-shadow: 0px 5px 8px rgba(0,0,0,0.03);
   }
   .header-area .container {
+    max-height: 80px;
     padding: 0px;
   }
   .header-area .logo {
