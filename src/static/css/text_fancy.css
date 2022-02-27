@@ -1,0 +1,70 @@
+.fancy-text .stroke {
+	-webkit-text-stroke-width: 2px;
+	-moz-text-stroke-width: 2px;
+	-webkit-text-stroke-color: #111827;
+	-moz-text-stroke-color: #111827;
+	color: transparent;
+}
+
+.fancy-text .shadow {
+	text-shadow: 6vw 6vw #0d6efd;
+}
+
+.fancy-text .stroke-shadow {
+	color: white;
+	text-shadow: -2px 0 #111827, 0 -2px #111827, 2px 0 #111827, 0 2px #111827, 2px 2px #111827, -2px -2px #111827, -2px 2px #111827, 2px -2px #111827, 6px 6px #0d6efd;
+}
+
+.fancy-text .halftone {
+	position: relative;
+}
+
+.fancy-text .halftone:after {
+	content: "Hello";
+	background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADCAYAAABWKLW/AAAAHElEQVQYV2NUVFT8f//+fUYGBgYGMAEDcA5IBQCKJQVmn76DhAAAAABJRU5ErkJggg==") repeat;
+	font-size: 15vw;
+	letter-spacing: 6px;
+	left: calc(56%);
+	position: absolute;
+	top: calc(56%);
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	-webkit-text-stroke-width: 0;
+	-moz-text-stroke-width: 0;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
+}
+
+.fancy-text .halftone-color:after {
+	background-color: #0d6efd;
+}
+
+.fancy-text body {
+	background-color: #fef3c7;
+	display: grid;
+	height: 100vh;
+	place-content: center;
+	text-align: center;
+}
+
+.fancy-text body p {
+	font-size: 15vw;
+	font-weight: bold;
+	letter-spacing: 5px;
+	margin: 0;
+}
+
+.fancy-text body .grid {
+	display: grid;
+	grid-gap: 5vw;
+	grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 768px) {
+	.fancy-text body .grid {
+		grid-template-columns: 1fr 1fr;
+	}
+}
